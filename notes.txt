@@ -1,0 +1,21 @@
+Break in update step1 (aka the failing one)
+
+(lldb) break set  -a 0x100035474
+Breakpoint 7: where = Platform_M+_and_X+`icon::FirmwareUpgradeComponent::doStep1(), address = 0x0000000100035474
+
+
+Jump to step 3 (chose the device to update)
+
+(lldb) register write rip 0x00100035C38       
+
+
+Break in first chance that fails:
+
+5: address = Platform_M+_and_X+[0x0000000100038074], locations = 1, resolved = 1, hit count = 1
+  5.1: where = Platform_M+_and_X+`icon::FirmwareUpgradeComponent::MidiInputHandler::sendProgram() + 1354, address = 0x0000000100038074, resolved, hit count = 1 
+
+
+Erase midi dump:
+
+16:15:16.382	To iCON firmware upgrade v1.00	SysEx		F0 1D 03 01 1C 00 7F 7F F7
+
